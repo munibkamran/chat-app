@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Home from './pages/Home'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import { useNavigate } from 'react-router-dom'
@@ -13,15 +13,15 @@ import { auth, db } from './firebase'
 import { useSelector } from 'react-redux'
 import { onAuthStateChanged } from 'firebase/auth'
 const App = () => {
+  const { currentUser } = useSelector((state) => state.chat)
+  const [appLoading, setAppLoading] = useState(true)
+  const { mode } = useSelector((state) => state.theme)
   const ProtectedRoute = ({ children }) => {
   if (!currentUser) {
     return <Navigate to="/login" />;
   }
   return children;
 };
- const { currentUser } = useSelector((state) => state.user)
- const [appLoading, setAppLoading] = useState(true)
- const { mode } = useSelector((state) => state.theme)
  
  useEffect(() => {
    const timer = setTimeout(() => {
