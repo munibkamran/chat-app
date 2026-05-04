@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Home from './pages/Home'
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import { useNavigate } from 'react-router-dom'
@@ -58,6 +58,8 @@ useEffect(() => {
  }, [mode])
  
 
+//  if(appLoading) return <div className="loading-spinner">Loading...</div>;
+
   return (
     <>
       <Toaster />
@@ -91,20 +93,18 @@ useEffect(() => {
           </motion.div>
         ) : (
           <motion.div
-            key="main-content"
+            // key="main-content"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
             className='bg-white dark:bg-[#1A1C20]'
           >
-            <BrowserRouter>
               <Routes>
                 <Route path='/' element={<ProtectedRoute><Home /></ProtectedRoute> } />
                 <Route path='/register' element={<Register />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/avatar' element={<Avatar />} />
               </Routes>
-            </BrowserRouter>
           </motion.div>
         )}
       </AnimatePresence>

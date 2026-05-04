@@ -17,8 +17,11 @@ const chatSlice = createSlice({
           ? currentUserUid + user.uid
           : user.uid + currentUserUid;
     },
+    setUser: (state, action) => {
+      state.currentUser = action.payload;
+    },
   },
 });
 
-export const { changeUser } = chatSlice.actions
+export const { changeUser, setUser } = chatSlice.actions
 export default chatSlice.reducer

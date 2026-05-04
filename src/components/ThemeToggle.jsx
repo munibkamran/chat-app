@@ -17,6 +17,7 @@ const ThemeToggle = () => {
     <div className="flex items-center gap-1 p-0.5 bg-gray-50 dark:bg-[#2A2D35] rounded-full border border-gray-200 dark:border-gray-700 w-fit transition-all duration-300 shadow-sm mb-4 ml-2">
       {themes.map((t) => (
         <button
+        type="button"
           key={t.id}
           onClick={() => dispatch(toggleTheme(t.id))}
           title={t.label}

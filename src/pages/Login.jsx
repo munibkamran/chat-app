@@ -9,12 +9,15 @@ import { ImSpinner3 } from "react-icons/im";
 import { CgEyeAlt, CgSpinner } from "react-icons/cg";
 import { TbMailFilled } from "react-icons/tb";
 import { HiEyeSlash } from "react-icons/hi2";
+import { useDispatch } from "react-redux";
+import { setUser } from "../redux/chatSlice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e) => {
@@ -27,7 +30,14 @@ const Login = () => {
 
     setLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const res = await signInWithEmailAndPassword(auth, email, password);
+      const userData = {
+        uid: res.user.uid,
+        email: res.user.email,
+        displayName: res.user.displayName,
+        photoURL: res.user.photoURL,
+    };
+      dispatch(setUser(userData));
       toast.success("Welcome back!");
       navigate("/");
     } catch (err) {
