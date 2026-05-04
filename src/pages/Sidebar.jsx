@@ -118,17 +118,7 @@ const Sidebar = () => {
           </div>
         </div>
         <div className="flex items-center py-[8px] lg:px-[8px] px-[12px] justify-between rounded-full">
-          {imageLoading ? (
-            skeletons.map((n) => (
-              <div key={n} className="flex items-center gap-[10px] p-2">
-                <div className="w-[46px] h-[46px] rounded-full bg-gray-200 dark:bg-white/10 animate-pulse border border-gray-100 dark:border-white/5" />
-                <div className="flex flex-col gap-2">
-                  <div className="h-3 w-24 bg-gray-200 dark:bg-white/10 animate-pulse rounded" />
-                  <div className="h-2 w-16 bg-gray-200 dark:bg-white/10 animate-pulse rounded" />
-                </div>
-              </div>
-            ))
-          ) : (
+          
             <div className="relative flex gap-[8px] items-center">
               <img
                 className="rounded-full h-[52px] w-[52px] object-cover"
@@ -140,7 +130,7 @@ const Sidebar = () => {
                 {currentUser?.displayName || "User"}
               </span>
             </div>
-          )}
+      
           <button
             onClick={async () => {
               try {

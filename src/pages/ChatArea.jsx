@@ -198,7 +198,7 @@ const ChatArea = () => {
           <div className="flex-1 overflow-y-auto no-scrollbar px-2">
             <Messages />
           </div>
-          <div className="flex-none p-4 pb-10 lg:pb-4 bg-transparent sticky bottom-0">
+          <div className="flex-none p-4 lg:pb-4 bg-transparent sticky bottom-0">
             <div className="bg-white dark:bg-[#1A1C20] shadow-sm rounded-full lg:rounded-lg w-full h-[55px] flex items-center px-4 gap-3 border dark:border-gray-800">
               <input
                 value={text}

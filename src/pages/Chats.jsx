@@ -22,45 +22,35 @@ const Chats = ({ users, filteredUsers, filter, formatChatDate }) => {
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    const getChats = () => {
-      const unsub = onSnapshot(
-        doc(db, "userChats", currentUserUid),
-        (snapShot) => {
-          // setChats(snapShot.data())
-          const newData = snapShot.data();
+  // useEffect(() => {
+  //   const getChats = () => {
+  //     const unsub = onSnapshot(
+  //       doc(db, "userChats", currentUserUid),
+  //       (snapShot) => {
+  //         // setChats(snapShot.data())
+  //         const newData = snapShot.data();
 
-          if (chats) {
-            Object.keys(newData).forEach((id) => {
-              if (newData[id]?.unreadCount > (chats[id]?.unreadCount || 0)) {
-                const audio = new Audio("/receive-sound.mp3");
-                audio.play().catch((e) => console.log("Audio play error:", e));
-              }
-            });
-          }
+  //         if (chats) {
+  //           Object.keys(newData).forEach((id) => {
+  //             if (newData[id]?.unreadCount > (chats[id]?.unreadCount || 0)) {
+  //               const audio = new Audio("/receive-sound.mp3");
+  //               audio.play().catch((e) => console.log("Audio play error:", e));
+  //             }
+  //           });
+  //         }
 
-          return setChats(newData);
-        },
-      );
-      return () => unsub();
-    };
+  //         return setChats(newData);
+  //       },
+  //     );
+  //     return () => unsub();
+  //   };
 
-    currentUserUid && getChats();
-  }, [currentUserUid]);
+  //   currentUserUid && getChats();
+  // }, [currentUserUid]);
 
   return (
     <>
-      {imageLoading ? (
-        skeletons.map((n) => (
-          <div key={n} className="flex items-center gap-[10px] p-2">
-            <div className="w-[46px] h-[46px] rounded-full bg-white/10 animate-pulse" />
-            <div className="flex flex-col gap-2">
-              <div className="h-3 w-24 bg-white/10 animate-pulse rounded" />
-              <div className="h-2 w-16 bg-white/10 animate-pulse rounded" />
-            </div>
-          </div>
-        ))
-      ) : sortedUsers.length > 0 ? (
+      { sortedUsers.length > 0 ? (
         sortedUsers.map((user, index) => {
           const isActive = selectedUser?.uid === user.uid;
           const combinedId =
