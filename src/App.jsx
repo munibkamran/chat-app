@@ -13,6 +13,13 @@ import { auth, db } from './firebase'
 import { useSelector } from 'react-redux'
 import { onAuthStateChanged } from 'firebase/auth'
 const App = () => {
+  const ProtectedRoute = ({ children }) => {
+  if (!currentUser) {
+    return <Navigate to="/login" />;
+  }
+  return children;
+};
+ const { currentUser } = useSelector((state) => state.user)
  const [appLoading, setAppLoading] = useState(true)
  const { mode } = useSelector((state) => state.theme)
  
@@ -92,7 +99,7 @@ useEffect(() => {
           >
             <BrowserRouter>
               <Routes>
-                <Route path='/' element={<Home />} />
+                <Route path='/' element={<ProtectedRoute><Home /></ProtectedRoute> } />
                 <Route path='/register' element={<Register />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/avatar' element={<Avatar />} />
